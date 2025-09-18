@@ -1,0 +1,12 @@
+# venv
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# دیتای برنامه
+tasks.json
+
+# VSCode
+.vscode/
