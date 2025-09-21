@@ -1,0 +1,14 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace   # حذف فاصله‌های اضافی در آخر خط
+      - id: end-of-file-fixer     # اضافه کردن خط خالی در پایان فایل
+      - id: check-yaml            # بررسی فرمت YAML
+      - id: check-json            # بررسی فرمت JSON
+      - id: check-added-large-files  # جلوگیری از اضافه کردن فایل خیلی بزرگ
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8                # بررسی استایل کد با flake8

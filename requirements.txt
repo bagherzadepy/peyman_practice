@@ -1,2 +1,7 @@
 # pip freeze > requirements.txt
-# no external dependencies
+
+flake8
+pre-commit
+pytest
+
+# pip install -r requirements.txt
