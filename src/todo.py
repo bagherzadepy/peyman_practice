@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Todo CLI App
+Todo CLI App - مدیریت تسک ها به صورت ساده
 Usage:
     python todo.py add "task description"
     python todo.py list
@@ -15,6 +15,7 @@ from datetime import datetime
 
 DATA_FILE = Path("tasks.json")
 
+
 def load_tasks():
     if not DATA_FILE.exists():
         return []
@@ -22,9 +23,12 @@ def load_tasks():
         return json.loads(DATA_FILE.read_text(encoding="utf-8"))
     except Exception:
         return []
-    
-def save_tasks(tasks):
-    DATA_FILE.write_text(json.dumps(tasks, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def save_tasks(tasks: list) -> None:
+    DATA_FILE.write_text(json.dumps(tasks, ensure_ascii=False, indent=2),
+                         encoding="utf-8")
+
 
 def add_task(text):
     tasks = load_tasks()
@@ -38,7 +42,8 @@ def add_task(text):
     save_tasks(tasks)
     print(f"Added task #{task['id']}: {task['text']}")
 
-def list_tasks():
+
+def list_tasks() -> None:
     tasks = load_tasks()
     if not tasks:
         print("No tasks yet. Use: python todo.py add \"task\"")
@@ -46,6 +51,7 @@ def list_tasks():
     for t in tasks:
         status = "✔" if t["done"] else " "
         print(f"[{status}] {t['id']:>3} - {t['text']} (created: {t['created_at']})")
+
 
 def mark_done(task_id):
     tasks = load_tasks()
@@ -57,6 +63,7 @@ def mark_done(task_id):
             return
     print(f"Task #{task_id} not found.")
 
+
 def remove_task(task_id):
     tasks = load_tasks()
     new = [t for t in tasks if t['id'] != task_id]
@@ -66,12 +73,15 @@ def remove_task(task_id):
         save_tasks([])
         print(f"Removed task #{task_id}.")
 
+
 def clear_all():
     save_tasks([])
     print("Cleared all tasks.")
 
+
 def help_msg():
     print(__doc__)
+
 
 def main(argv):
     if len(argv) < 2:
@@ -90,6 +100,7 @@ def main(argv):
         clear_all()
     else:
         help_msg()
+
 
 if __name__ == "__main__":
     main(sys.argv)
